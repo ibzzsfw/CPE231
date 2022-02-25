@@ -20,32 +20,17 @@ MariaDB [conference]> CREATE TABLE IF NOT EXISTS `tb_account` (
     -> );
 MariaDB [conference]> ALTER TABLE tb_account CHANGE _id account_id int(11);
 MariaDB [conference]> CREATE TABLE IF NOT EXISTS `tb_paper` (
-    -> `_id` int(11) NOT NULL AUTO_INCREMENT,
-    -> `created` timestamp DEFAULT CURRENT_TIMESTAMP NULL DEFAULT NULL,
-    -> `modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
-    -> `category` int(11) NOT NULL,
-    -> `title` text COLLATE utf8_unicode_ci NOT NULL,
-    -> `author` text COLLATE utf8_unicode_ci NOT NULL,
-    -> `present` int(11) NOT NULL,
-    -> `correspond` int(11) NOT NULL,
-    -> `emailcorr` text COLLATE utf8_unicode_ci NOT NULL,
-    -> `abstract` text COLLATE utf8_unicode_ci NOT NULL,
-    -> `status` int(11) NOT NULL,
-    -> PRIMARY KEY (`_id`)
-    -> );
-MariaDB [conference]> drop table tb_paper;
-MariaDB [conference]> CREATE TABLE IF NOT EXISTS `tb_paper` (
     -> `_id` int(11) NOT NULL,
     -> `account_id` int(11) NOT NULL,
     -> `created` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-    -> `modified` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+    -> `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     -> `category` int(11) NOT NULL,
-    -> `title` text COLLATE utf8_unicode_ci NOT NULL,
-    -> `author` text COLLATE utf8_unicode_ci NOT NULL,
+    -> `title` text NOT NULL,
+    -> `author` text NOT NULL,
     -> `present` int(11) NOT NULL,
     -> `correspond` int(11) NOT NULL,
-    -> `emailcorr` text COLLATE utf8_unicode_ci NOT NULL,
-    -> `abstract` text COLLATE utf8_unicode_ci NOT NULL,
+    -> `emailcorr` text NOT NULL,
+    -> `abstract` text NOT NULL,
     -> `status` int(11) NOT NULL,
     -> PRIMARY KEY (`_id`)
     -> );
@@ -63,7 +48,7 @@ MariaDB [conference]> ALTER TABLE tb_paper MODIFY status boolean NOT NULL;
 MariaDB [conference]> ALTER TABLE tb_paper ADD comment VARCHAR(60) AFTER abstract;
 MariaDB [conference]> CREATE TABLE IF NOT EXISTS `tb_category` (
     -> `category_id` int(11) NOT NULL AUTO_INCREMENT,
-    -> `category` text COLLATE utf8_unicode_ci NOT NULL,
+    -> `category` text NOT NULL,
     -> PRIMARY KEY (`category_id`)
     -> );
 MariaDB [conference]> INSERT INTO tb_category (category) VALUES ('Chemistry'), ('Biology'), ('Physics'), ('Mathematics'), ('Computing and Information Technology');
@@ -78,8 +63,8 @@ MariaDB [conference]> INSERT INTO tb_account
     -> (account_id, email, password, code, title_name, first_name, middle_name, last_name, address, city, postal_code, country)
     -> VALUES (1, 'email@email.com', 'p@assword123', 'code', 'titlename', 'John', 'Mid', 'Doe', 'abc', 'BKK', '10140', 'Thailand');
 MariaDB [conference]> INSERT INTO tb_paper
-    -> (paper_id, account_id, category, title, author, emailcorr, abstract, status) 
-    -> VALUES (1, 1, 2, 'title', 'author', 'emailcorr', 'abstract', 0)
+    -> (paper_id, account_id, modified, category, title, author, emailcorr, abstract, status) 
+    -> VALUES (1, 1, CURRENT_TIMESTAMP, 2, 'title', 'author', 'emailcorr', 'abstract', 0)
     -> ;
 MariaDB [conference]> SELECT * FROM tb_account;
 MariaDB [conference]> DROP DATABASE conference;
