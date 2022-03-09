@@ -27,8 +27,6 @@ MariaDB [dreamhome database]> SELECT * FROM staff;
 +---------+-------+-------+------------+------+---------------------+--------+----------+-----------+--------------+----------------------------+
 6 rows in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT staffNo, fName, lName, salary FROM Staff;
-ERROR 1146 (42S02): Table 'dreamhome database.Staff' doesn't exist
 MariaDB [dreamhome database]> SELECT staffNo, fName, lName, salary FROM staff;
 +---------+-------+-------+--------+
 | staffNo | fName | lName | salary |
@@ -100,9 +98,6 @@ MariaDB [dreamhome database]> SELECT staffNo, fName, lName, salary/12 AS monthly
 +---------+-------+-------+---------------+
 6 rows in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position, salary FROM Staff
-    -> WHERE salary > 10000;
-ERROR 1146 (42S02): Table 'dreamhome database.Staff' doesn't exist
 MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position, salary FROM staff WHERE salary > 10000;
 +---------+-------+-------+------------+--------+
 | staffNo | fName | lName | position   | salary |
@@ -114,10 +109,6 @@ MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position, salary FRO
 +---------+-------+-------+------------+--------+
 4 rows in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT *
-    -> FROM branch
-    -> WHERE city = `London` OR city = `Glasgow`;                    
-ERROR 1054 (42S22): Unknown column 'London' in 'where clause'
 MariaDB [dreamhome database]> SELECT * FROM branch WHERE city = 'London' OR city = 'Glasgow';
 +----------+-----------------+---------+----------+
 | branchNo | street          | city    | postcode |
@@ -147,14 +138,6 @@ MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position, salary FRO
 +---------+-------+-------+----------+--------+
 2 rows in set (0.000 sec)
 
-MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position FROM staff
-    -> WHERE position staffNo,);SupervisorstaffNo,, ManagerIN (
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'staffNo,)' at line 2
-    -> ;                                                                          
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'SupervisorstaffNo,, ManagerIN (' at line 1
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
 MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position FROM staff WHERE position IN ('Manager', 'Supervisor');    
 +---------+-------+-------+------------+
 | staffNo | fName | lName | position   |
@@ -175,18 +158,6 @@ MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position FROM staff 
 +---------+-------+-------+------------+
 3 rows in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT ownerNo, fName, lName, address, telNo FROM PrivateOwner
-    -> WHERE address LIKE '%Glasgow%';
-ERROR 1146 (42S02): Table 'dreamhome database.PrivateOwner' doesn't exist
-MariaDB [dreamhome database]> SELECT ownerNo, fName, lName, address, telNo FROM privateOwner WHERE address LIKE '%Glasgow%';
-ERROR 1146 (42S02): Table 'dreamhome database.privateOwner' doesn't exist
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> SELECT ownerNo, fName, lName, address, telNo FROM privateOwner WHERE address LIKE '%Glasgow%';
-ERROR 1146 (42S02): Table 'dreamhome database.privateOwner' doesn't exist
 MariaDB [dreamhome database]> select * from staff
     -> ;
 +---------+-------+-------+------------+------+---------------------+--------+----------+-----------+--------------+----------------------------+
@@ -213,8 +184,6 @@ MariaDB [dreamhome database]> show tables;
 +------------------------------+
 5 rows in set (0.000 sec)
 
-MariaDB [dreamhome database]> SELECT ownerNo, fName, lName, address, telNo FROM client WHERE address LIKE '%Glasgow%';
-ERROR 1054 (42S22): Unknown column 'ownerNo' in 'field list'
 MariaDB [dreamhome database]> select * from client;
 +------+----------+-----------+--------------+-----------+------------------------+----------------+----------+------------------------+---------------------+---------------------+---------+---------+
 | ID   | clientNo | fName     | lName        | telNo     | Street                 | City           | PostCode | email                  | JoinedOn            | Region              | preType | maxRent |
@@ -234,12 +203,6 @@ MariaDB [dreamhome database]> select * from client;
 +------+----------+-----------+--------------+-----------+------------------------+----------------+----------+------------------------+---------------------+---------------------+---------+---------+
 12 rows in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT clientNo, fName, lName, address, telNo FROM client WHERE address LIKE '%Glasgow%';
-ERROR 1054 (42S22): Unknown column 'address' in 'field list'
-MariaDB [dreamhome database]> SELECT clientNo, fName, lName, City, telNo FROM client WHERE address LIKE '%Glasgow%';
-ERROR 1054 (42S22): Unknown column 'address' in 'where clause'
-MariaDB [dreamhome database]> SELECT clientNo, fName, lName, City, telNo FROM client WHERE address LIKE '%Chicago%';
-ERROR 1054 (42S22): Unknown column 'address' in 'where clause'
 MariaDB [dreamhome database]> SELECT clientNo, fName, lName, City, telNo FROM client WHERE City LIKE '%Chicago%';
 +----------+--------+-----------+---------+----------+
 | clientNo | fName  | lName     | City    | telNo    |
@@ -248,12 +211,7 @@ MariaDB [dreamhome database]> SELECT clientNo, fName, lName, City, telNo FROM cl
 +----------+--------+-----------+---------+----------+
 1 row in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT clientNo, viewDate FROM viewing
-    -> WHERE propertyNo = 'PG4' AND comment IS NULL;
-ERROR 1054 (42S22): Unknown column 'clientNo' in 'field list'
-MariaDB [dreamhome database]> select * from viewing
-    -> 
-    -> ;
+MariaDB [dreamhome database]> select * from viewing;
 +------+----------+------------+---------------------+----------+--------------------+------------+
 | ID   | clientID | propertyNo | viewDate            | viewHour | Comment            | WishToRent |
 +------+----------+------------+---------------------+----------+--------------------+------------+
@@ -342,17 +300,6 @@ MariaDB [dreamhome database]> SELECT COUNT(DISTINCT propertyNo) AS myCount FROM 
 +---------+
 1 row in set, 2 warnings (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT COUNT(staffNo) AS myCount, SUM(salary) AS mySum FROM staff
-    -> WHERE COUNT;Managerposition = 
-ERROR 1054 (42S22): Unknown column 'COUNT' in 'where clause'
-    -> SELECT COUNT(staffNo) AS myCount, SUM(salary) AS mySum FROM staff
-    -> WHERE position = 'Manager'; 
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'Managerposition = 
-SELECT COUNT(staffNo) AS myCount, SUM(salary) AS mySum FRO...' at line 1
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
 MariaDB [dreamhome database]> SELECT COUNT(staffNo) AS myCount, SUM(salary) AS mySum FROM staff WHERE position = 'Manager';
 +---------+-------+
 | myCount | mySum |
@@ -398,12 +345,6 @@ MariaDB [dreamhome database]> SELECT branchNo,
 +----------+---------+-------+
 2 rows in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position FROM staff
-    -> WHERE branchNo =
-    -> (SELECT branchNo
-    -> FROM Branch
-    -> WHERE street = '163 Main St');    
-ERROR 1146 (42S02): Table 'dreamhome database.Branch' doesn't exist
 MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position FROM staff WHERE branchNo = (SELECT branchNo FROM branch WHERE street = '163 Main St');
 Empty set (0.001 sec)
 
@@ -417,11 +358,6 @@ MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position FROM staff
 | SG5     | Susan | Brand | Manager    |
 +---------+-------+-------+------------+
 3 rows in set (0.001 sec)
-
-MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position,
-    -> WHERE branchNo =  'B003';;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'WHERE branchNo =  'B003'' at line 2
-ERROR: No query specified
 
 MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position,
     -> salary - (SELECT AVG(salary) FROM staff) As SalDif
@@ -451,18 +387,6 @@ MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position,
 +---------+-------+-------+------------+---------+
 3 rows in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT propertyNo, street, city, postcode, type, rooms, rent
-    -> FROM propertyForRent
-    -> WHERE staffNo IN
-    -> (SELECT staffNo
-    -> FROM staff
-    -> WHERE branchNo =
-    -> (SELECT branchNo
-    -> FROM Branch
-    -> WHERE street = '163 Main St'));           
-ERROR 1146 (42S02): Table 'dreamhome database.propertyForRent' doesn't exist
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
 MariaDB [dreamhome database]> SELECT propertyNo, street, city, postcode, type, rooms, rent
     -> FROM propertyforrent
     -> WHERE staffNo IN
@@ -502,14 +426,6 @@ MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position, salary
 +---------+-------+-------+----------+--------+
 1 row in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT c.clientNo, fName, lName,
-    -> propertyNo, comment
-    -> FROM client c, viewing v
-    -> WHERE c.clientNo = v.clientNo;
-ERROR 1054 (42S22): Unknown column 'v.clientNo' in 'where clause'
-MariaDB [dreamhome database]> show table
-    -> ;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
 MariaDB [dreamhome database]> show tables;
 +------------------------------+
 | Tables_in_dreamhome database |
@@ -542,8 +458,6 @@ MariaDB [dreamhome database]> select * from client
 +------+----------+-----------+--------------+-----------+------------------------+----------------+----------+------------------------+---------------------+---------------------+---------+---------+
 12 rows in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT c.clientNo, fName, lName, propertyNo, comment FROM client c, viewing v WHERE c.clientNo = v.clientNo;
-ERROR 1054 (42S22): Unknown column 'v.clientNo' in 'where clause'
 MariaDB [dreamhome database]> select * from viewing
     -> ;
 +------+----------+------------+---------------------+----------+--------------------+------------+
@@ -617,14 +531,6 @@ MariaDB [dreamhome database]> SELECT s.branchNo, s.staffNo, COUNT(*) AS myCount
 +----------+---------+---------+
 4 rows in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT b.*, p.*
-    -> FROM branch1 b LEFT JOIN
-    -> propertyforrent1 p ON b.bCity = p.pCity;
-ERROR 1146 (42S02): Table 'dreamhome database.branch1' doesn't exist
-MariaDB [dreamhome database]> SELECT b.*, p.*
-    -> FROM Branch1 b LEFT JOIN
-    -> PropertyForRent1 p ON b.bCity = p.pCity;
-ERROR 1146 (42S02): Table 'dreamhome database.Branch1' doesn't exist
 MariaDB [dreamhome database]> select * from branch
     -> ;
 +----------+------------------+----------+----------+
@@ -638,8 +544,6 @@ MariaDB [dreamhome database]> select * from branch
 +----------+------------------+----------+----------+
 5 rows in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT b.*, p.* FROM Branch1 b LEFT JOIN PropertyForRent1 p ON b.city = p.pcity;
-ERROR 1146 (42S02): Table 'dreamhome database.Branch1' doesn't exist
 MariaDB [dreamhome database]> select * from propertyforrent
     -> ;
 +------------+-------------------+----------+----------+-------+-------+------+---------+---------+----------+-------------------+------------------+
@@ -655,18 +559,6 @@ MariaDB [dreamhome database]> select * from propertyforrent
 +------------+-------------------+----------+----------+-------+-------+------+---------+---------+----------+-------------------+------------------+
 7 rows in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT b.*, p.* FROM branch1 b LEFT JOIN propertyforrent1 p ON b.bcity = p.pcity;
-ERROR 1146 (42S02): Table 'dreamhome database.branch1' doesn't exist
-MariaDB [dreamhome database]> SELECT b.*, p.* FROM branch1 b LEFT JOIN propertyforrent1 p ON b.city = p.city;
-ERROR 1146 (42S02): Table 'dreamhome database.branch1' doesn't exist
-MariaDB [dreamhome database]> SELECT b.*, p.* FROM branch b LEFT JOIN propertyforrent1 p ON b.city = p.city;
-ERROR 1146 (42S02): Table 'dreamhome database.propertyforrent1' doesn't exist
-MariaDB [dreamhome database]> SELECT b.*, p.* FROM branch b LEFT JOIN propertyforrent1 p ON b.city = p.city;
-ERROR 1146 (42S02): Table 'dreamhome database.propertyforrent1' doesn't exist
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
 MariaDB [dreamhome database]> SELECT b.*, p.* FROM branch b LEFT JOIN propertyforrent p ON b.city = p.city;
 +----------+------------------+----------+----------+------------+-------------------+----------+----------+-------+-------+------+---------+---------+----------+-------------------+------------------+
 | branchNo | street           | city     | postcode | propertyNo | street            | city     | postcode | type  | rooms | rent | ownerNo | staffNo | branchNo | picture           | floorPlan        |
@@ -683,10 +575,6 @@ MariaDB [dreamhome database]> SELECT b.*, p.* FROM branch b LEFT JOIN propertyfo
 +----------+------------------+----------+----------+------------+-------------------+----------+----------+-------+-------+------+---------+---------+----------+-------------------+------------------+
 9 rows in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT b.*, p.*
-    -> FROM Branch b RIGHT JOIN
-    -> propertyforrent p ON b.city = p.city;
-ERROR 1146 (42S02): Table 'dreamhome database.Branch' doesn't exist
 MariaDB [dreamhome database]> SELECT b.*, p.* FROM branch b RIGHT JOIN propertyforrent p ON b.city = p.city;
 +----------+------------------+----------+----------+------------+-------------------+----------+----------+-------+-------+------+---------+---------+----------+-------------------+------------------+
 | branchNo | street           | city     | postcode | propertyNo | street            | city     | postcode | type  | rooms | rent | ownerNo | staffNo | branchNo | picture           | floorPlan        |
@@ -702,24 +590,9 @@ MariaDB [dreamhome database]> SELECT b.*, p.* FROM branch b RIGHT JOIN propertyf
 +----------+------------------+----------+----------+------------+-------------------+----------+----------+-------+-------+------+---------+---------+----------+-------------------+------------------+
 8 rows in set (0.001 sec)
 
-MariaDB [dreamhome database]> SELECT b.*, p.*
-    -> FROM branch b FULL JOIN
-    -> propertyforrent p ON b.city = p.city;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FULL JOIN
-propertyforrent p ON b.city = p.city' at line 2
 MariaDB [dreamhome database]> SELECT b.*, p.* FROM branch b FULL JOIN propertyforrent p ON b.city = p.city;
 ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'FULL JOIN propertyforrent p ON b.city = p.city' at line 1
-MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position
-    -> FROM staff s
-    -> WHERE EXISTS
-    -> (SELECT *
-    -> FROM branch b
-    -> WHERE s.branchNo = b.branchNo AND
-    -> s.branchNo);Londoncity = 
-Empty set, 6 warnings (0.001 sec)
 
-    -> ;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'Londoncity =' at line 1
 MariaDB [dreamhome database]> SELECT staffNo, fName, lName, position
     -> FROM staff s
     -> WHERE EXISTS
@@ -787,9 +660,6 @@ MariaDB [dreamhome database]> (SELECT city FROM branch)
 +----------+
 3 rows in set (0.002 sec)
 
-MariaDB [dreamhome database]> (SELECT city FROM Branch)
-    -> ;
-ERROR 1146 (42S02): Table 'dreamhome database.Branch' doesn't exist
 MariaDB [dreamhome database]> (SELECT city FROM branch)
     -> EXCEPT
     -> (SELECT city FROM propertyforrent);
@@ -800,11 +670,6 @@ MariaDB [dreamhome database]> (SELECT city FROM branch)
 +---------+
 1 row in set (0.001 sec)
 
-MariaDB [dreamhome database]> INSERT INTO staff
-    -> VALUES ('SG16' , 'Alan', 'Brown', 'Assistant', 'M', Date'1957-05-25', 8300, 'B003');
-ERROR 1136 (21S01): Column count doesn't match value count at row 1
-MariaDB [dreamhome database]> INSERT INTO staff VALUES ('SG16' , 'Alan', 'Brown', 'Assistant', 'M', Date'1957-05-25', 8300, 'B003');
-ERROR 1136 (21S01): Column count doesn't match value count at row 1
 MariaDB [dreamhome database]> select * from staff
     -> ;
 +---------+-------+-------+------------+------+---------------------+--------+----------+-----------+--------------+----------------------------+
@@ -819,8 +684,6 @@ MariaDB [dreamhome database]> select * from staff
 +---------+-------+-------+------------+------+---------------------+--------+----------+-----------+--------------+----------------------------+
 6 rows in set (0.001 sec)
 
-MariaDB [dreamhome database]> INSERT INTO staff VALUES ('SG16' , 'Alan', 'Brown', 'Assistant', 'M', Date'1957-05-25', 8300, 'B003', '0', 'a');
-ERROR 1136 (21S01): Column count doesn't match value count at row 1
 MariaDB [dreamhome database]> INSERT INTO staff VALUES ('SG16' , 'Alan', 'Brown', 'Assistant', 'M', Date'1957-05-25', 8300, 'B003', '0', '0', 'a');
 Query OK, 1 row affected (0.004 sec)
 
@@ -828,34 +691,6 @@ MariaDB [dreamhome database]> INSERT INTO staff (staffNo, fName, lName, position
     -> VALUES ('SG44', 'Anne', 'Jones', 'Assistant', 8100, 'B003');                           
 Query OK, 1 row affected (0.004 sec)
 
-MariaDB [dreamhome database]> CREAT TABLE 'StaffPropCount'
-    -> text 'staffNo' NOT NULL,
-    -> text 'fName' NOT NULL,
-    -> text 'lName' NOT NULL,
-    -> int 'propCount' DEFAULT 0 NOT NULL
-    -> ;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'CREAT TABLE 'StaffPropCount'
-text 'staffNo' NOT NULL,
-text 'fName' NOT NULL,
-...' at line 1
-MariaDB [dreamhome database]> CREAT TABLE `StaffPropCount` (
-    -> `staffNo` text NOT NULL,
-    -> `fName` text NOT NULL,
-    -> `lName` text NOT NULL,
-    -> `propCount` int(11) DEFAULT 0 NOT NULL,
-    -> PRIMARY KEY (`staffNo`)
-    -> );
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'CREAT TABLE `StaffPropCount` (
-`staffNo` text NOT NULL,
-`fName` text NOT NULL...' at line 1
-MariaDB [dreamhome database]> CREAT TABLE IF NOT EXISTS `StaffPropCount` ( `staffNo` text NOT NULL, `fName` text NOT NULL, `lName` text NOT NULL, `propCount` int(11) DEFAULT 0 NOT NULL, PRIMARY KEY (`staffNo`) );
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'CREAT TABLE IF NOT EXISTS `StaffPropCount` ( `staffNo` text NOT NULL, `fName`...' at line 1
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> 
-MariaDB [dreamhome database]> CREATE TABLE IF NOT EXISTS `StaffPropCount` ( `staffNo` text NOT NULL, `fName` text NOT NULL, `lName` text NOT NULL, `propCount` int(11) DEFAULT 0 NOT NULL, PRIMARY KEY (`staffNo`) );
-ERROR 1170 (42000): BLOB/TEXT column 'staffNo' used in key specification without a key length
 MariaDB [dreamhome database]> CREATE TABLE IF NOT EXISTS `StaffPropCount` ( `staffNo` text NOT NULL, `fName` text NOT NULL, `lName` text NOT NULL, `propCount` int(11) DEFAULT 0 NOT NULL);
 Query OK, 0 rows affected (0.018 sec)
 
@@ -894,9 +729,6 @@ MariaDB [dreamhome database]> UPDATE staff
 Query OK, 8 rows affected (0.005 sec)
 Rows matched: 8  Changed: 8  Warnings: 0
 
-MariaDB [dreamhome database]> UPDATE staff
-    -> ;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
 MariaDB [dreamhome database]> select * from staff      
     -> ;
 +---------+-------+-------+------------+------+---------------------+--------+----------+-----------+--------------+----------------------------+
@@ -939,9 +771,6 @@ MariaDB [dreamhome database]> DELETE FROM viewing
     -> WHERE propertyNo = 'PG4';
 Query OK, 2 rows affected (0.004 sec)
 
-MariaDB [dreamhome database]> seelct * from viewing
-    -> ;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'seelct * from viewing' at line 1
 MariaDB [dreamhome database]> select * from viewing;
 +------+----------+------------+---------------------+----------+--------------------+------------+
 | ID   | clientID | propertyNo | viewDate            | viewHour | Comment            | WishToRent |
